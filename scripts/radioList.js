@@ -4,7 +4,6 @@ function eventListenerArray() {
     for (let i = 0; i < validityList.length; i++) {
         // ON;
         validityList[i].addEventListener('mouseenter', hoverRadioList);
-        //        validityList[i].addEventListener('mouseup', ho);
         // OFF;
         validityList[i].addEventListener('mouseleave', resetColor);
     }
@@ -16,13 +15,13 @@ function hoverRadioList(event) {
 
     switch (activeField) {
         case 'validity-1':
-            input.style.backgroundColor = 'rgba(200, 20, 0, .8)';
+            input.style.backgroundImage = 'linear-gradient(90deg, rgba(255, 255, 255, .8)50%, rgba(200,20,0,.8)80%)';
             break;
         case 'validity-2':
-            input.style.backgroundColor = 'rgba(0, 20, 200, .8)';
+            input.style.backgroundImage = 'linear-gradient(90deg,rgba(255,255,255,.8)50%, rgba(0, 20, 200, .8)80%)';
             break;
         case 'validity-3':
-            input.style.backgroundColor = 'rgba(50, 100, 50, .8)';
+            input.style.backgroundImage = 'linear-gradient(90deg, rgba(255,255,255,.8)50%, rgba(40,150,10,.8)80%)';
             break;
     }
 }
