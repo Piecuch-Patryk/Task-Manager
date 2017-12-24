@@ -1,22 +1,22 @@
 let tasksArray = [
     {
-        id: 'first task',
-        validity: 'validity-1',
+        id: 'Learn more JavaScript.',
+        validity: 'validity-2',
         date: '21:27:31|04/10/2017'
     },
     {
-        id: 'second task',
-        validity: 'validity-2',
+        id: 'Exercise every day.',
+        validity: 'validity-1',
         date: '11:10:31|05/10/2017'
     },
     {
-        id: 'third task',
+        id: 'Food shoping.',
         validity: 'validity-3',
         date: '15:32:59|11/10/2017'
     },
     {
-        id: 'fourth task',
-        validity: 'validity-2',
+        id: 'Be Happy!',
+        validity: 'validity-1',
         date: '21:27:31|20/10/2017'
     }
 ];
@@ -56,7 +56,7 @@ function newTask() {
         if (month < 10 && month >= 0) {
             month = '0' + month;
         }
-        const actualTimeDate = hour + ':' + minute + ':' + second + '|' + day + '/' + month + '/' + year;
+        const actualTimeDate = 'Saved at ' + hour + ':' + minute + ':' + second + '|' + day + '/' + month + '/' + year;
 
         validation = validation.id;
 
@@ -87,9 +87,7 @@ function createList() {
     for (let i = 0; i < tasksArray.length; i++) {
         const li = document.createElement('li'),
             toggleBtn = document.createElement('button'),
-            toggleBtnText = document.createTextNode('Done'),
             deleteBtn = document.createElement('button'),
-            deleteBtnText = document.createTextNode('Delete'),
             span = document.createElement('span'),
             p = document.createElement('p'),
             textNodeP = document.createTextNode(tasksArray[i].id),
@@ -100,10 +98,10 @@ function createList() {
         // build up buttons;
         toggleBtn.classList.add('toggle-btn');
         toggleBtn.setAttribute('type', 'button');
-        toggleBtn.appendChild(toggleBtnText);
+        toggleBtn.innerHTML = '<i class="fa fa-check-square-o" aria-hidden="true"></i>';
         deleteBtn.classList.add('delete-btn');
         deleteBtn.setAttribute('type', 'button');
-        deleteBtn.appendChild(deleteBtnText);
+        deleteBtn.innerHTML = '<i class="fa fa-trash" aria-hidden="true"></i>';
         // build up task list;
         li.appendChild(toggleBtn);
         li.appendChild(p);
@@ -116,6 +114,8 @@ function createList() {
         // set background depending on validity;
         setBackground(validity, li);
     }
+    // clear fault field;
+    document.querySelector('.fault').value = '';
     // clear input field;
     document.getElementById('taskText').value = '';
     // task buttons;
@@ -129,13 +129,13 @@ function createList() {
 function setBackground(str, el) {
     switch (str) {
         case 'validity-1':
-            el.style.backgroundColor = 'rgba(200, 20, 0, .8)';
+            el.style.backgroundImage = 'linear-gradient(90deg,rgba(255,255,255,.8)50%, rgba(200, 20, 0, .8)80%)';
             break;
         case 'validity-2':
-            el.style.backgroundColor = 'rgba(0, 20, 200, .8)';
+            el.style.backgroundImage = 'linear-gradient(90deg,rgba(255,255,255,.8)50%, rgba(0, 20, 200, .8)80%)';
             break;
         case 'validity-3':
-            el.style.backgroundColor = 'rgba(50, 100, 50, .8)';
+            el.style.backgroundImage = 'linear-gradient(90deg, rgba(255,255,255,.8)50%, rgba(40,150,10,.8)80%)';
             break;
     }
 }
@@ -154,7 +154,11 @@ function toggleTask() {
 
         toggleBtn[i].addEventListener('mouseup', function (ev) {
             ev = ev.target;
+
+            ev.parentElement.parentElement.children[1].classList.toggle('line-throught');
+
             ev.classList.toggle('checked-btn');
+            console.log();
         })
     }
 }
@@ -165,19 +169,19 @@ function deleteTask() {
     for (let i = 0; i < deleteBtn.length; i++) {
 
         deleteBtn[i].addEventListener('mouseup', function (ev) {
-            const textToRemove = ev.target.previousElementSibling.innerHTML;
+            const textToRemove = ev.target.parentElement.parentElement.innerHTML,
+                elToRemove = ev.target.parentElement.parentElement;
 
             tasksArray.splice(i, 1);
-            ev.target.parentElement.remove();
+            elToRemove.remove();
         });
     }
 }
-// add actual time&date to every new list element;
-function addTimeDate() {
-
+// clear fault message;
+function resetCurrentTask() {
+    document.querySelector('.fault').innerHTML = '';
 }
-
 
 document.addEventListener('DOMContentLoaded', createList);
 document.getElementById('new').addEventListener('mouseup', newTask);
-document.getElementById('new').addEventListener('mouseup', addTimeDate);
+document.getElementById('reset').addEventListener('mouseup', resetCurrentTask);

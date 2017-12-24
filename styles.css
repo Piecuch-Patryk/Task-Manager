@@ -10,24 +10,24 @@ html {
 
 body {
     text-align: center;
-    max-width: 100rem;
+    width: 100rem;
     margin: 0 auto;
-    /*    background-color: #bbb;*/
 }
 
 body h1 {
     display: inline-block;
     margin: 2rem;
-    text-align: center;
+    font-size: 3rem;
+    color: rgba(10, 30, 60, .8);
 }
 
 
 /*fault title*/
 
 .fault {
+    height: 3rem;
     font-size: 2rem;
     color: rgba(200, 0, 0, .8);
-    height: 3rem;
 }
 
 
@@ -35,60 +35,39 @@ body h1 {
 
 .app-container {
     text-align: center;
-    margin: 5rem;
-    background-color: rgba(0, 0, 0, .1);
+    background-color: rgba(10, 30, 60, .8);
     padding: 1rem;
     border-radius: .5rem;
-    font-size: 2rem;
-    box-shadow: -.2rem -.2rem 1rem rgba(0, 0, 0, .2);
+    font-size: 2.5rem;
+    box-shadow: 0 0 5rem rgba(10, 30, 60, 1);
+    color: rgba(255, 255, 255, 0.5);
 }
 
 
 /*form*/
 
 .task-input {
-    width: 90%;
-    background-color: rgba(255, 255, 255, .8);
+    width: 85%;
     border: none;
     border-radius: .2rem;
-    transition: .5s;
     padding: 1rem;
+    background-color: rgba(255, 255, 255, .8);
     font-size: 2rem;
+    color: rgba(10, 30, 60, .8);
+    transition: .5s;
 }
 
 .validity-box {
     display: flex;
     justify-content: space-around;
-    margin-top: 2rem;
+    margin-top: 1rem;
     padding: 1rem;
-    transition: .25s linear;
-}
-
-.validity-box:hover {
-    transform: scale(1.05);
 }
 
 .radio-span {
     padding: 0 1rem;
     line-height: 3rem;
-    border: .5rem solid #fff;
-    border-radius: 10% 20%;
-}
-
-.radio-span:hover {
-    cursor: pointer;
-}
-
-.radio-span:nth-of-type(1) {
-    border-color: rgba(200, 20, 0, .8);
-}
-
-.radio-span:nth-of-type(2) {
-    border-color: rgba(0, 20, 200, .8);
-}
-
-.radio-span:nth-of-type(3) {
-    border-color: rgba(50, 100, 50, .8);
+    border-radius: .5rem;
 }
 
 .validity-box input:hover,
@@ -98,13 +77,15 @@ body h1 {
 
 .app-container .new-task-btn,
 .app-container .reset-btn {
-    width: 35%;
+    width: 25%;
     border: none;
     font-size: 2rem;
     border-radius: .5rem;
-    margin: 2rem;
+    margin: 1rem 5%;
     padding: 1rem;
     color: rgba(255, 255, 255, .8);
+    box-shadow: 0 0 1rem rgba(255, 255, 255, .2);
+    transition: .5s;
 }
 
 .new-task-btn:hover,
@@ -125,7 +106,7 @@ body h1 {
 }
 
 .reset-btn:hover {
-    background-color: rgba(150, 10, 30, .9);
+    background-color: rgba(160, 10, 30, .9);
 }
 
 
@@ -136,34 +117,59 @@ body h1 {
 }
 
 .tasks-list li {
+    position: relative;
     display: flex;
     justify-content: space-between;
-    padding: .5rem;
+    padding: 1rem;
     margin: 1rem;
     font-size: 2rem;
-    color: #ddd;
+    color: rgba(255, 255, 255, .9);
     border-radius: .5rem;
 }
 
-.tasks-list p {}
+.tasks-list p {
+    display: inline-block;
+    margin-left: 3rem;
+    color: rgba(10, 30, 60, .8);
+}
+
+.tasks-list span {
+    margin-right: 3rem;
+}
 
 .toggle-btn,
 .delete-btn {
-    width: 50px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     font-size: 1.2rem;
     border: none;
     border-radius: .2rem;
+    background: none;
+    font-size: 2rem;
+    color: rgba(10, 30, 60, .8);
     transition: .5s;
 }
 
+.toggle-btn {
+    left: 1rem;
+}
+
 .delete-btn {
-    background-color: rgba(200, 0, 0, .8);
+    right: 1rem;
     font-weight: bold;
-    color: #fff;
+    color: white;
+    opacity: .5;
+    /*    color: rgba(100, 30, 0, 1);*/
+    font-size: 3rem;
+}
+
+.line-throught {
+    text-decoration: line-through;
 }
 
 .checked-btn {
-    background-color: rgba(0, 250, 0, 1);
+    color: rgba(0, 200, 30, .8);
 }
 
 .toggle-btn:hover {
