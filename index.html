@@ -14,7 +14,7 @@
     <h3 class="fault"></h3>
     <section class="app-container">
         <form>
-            <input class="task-input" placeholder="New task..." type="text" id="taskText">
+            <input class="task-input" placeholder="New task (max. 50 characters)" type="text" id="taskText">
             <div class="validity-box">
                 <span class="radio-span">
                 <input type="radio" name="validity" id="validity-1" value="important">
@@ -36,9 +36,14 @@
     </section>
     <!--     end app container -->
 
+    <script src="./scripts/modules/tasks.js" type="text/javascript"></script>
+    <script src="./scripts/modules/create-list.js" type="text/javascript"></script>
+    <script src="./scripts/modules/new-task.js" type="text/javascript"></script>
+    <script src="./scripts/modules/reset.js" type="text/javascript"></script>
+    <script src="./scripts/modules/validity.js" type="text/javascript"></script>
+    <script src="./scripts/modules/delete-toggle.js" type="text/javascript"></script>
     <!-- run app script    -->
-    <script src="./scripts/main.js" type="text/javascript"></script>
-    <script src="./scripts/radioList.js" type="text/javascript"></script>
+    <script src="./scripts/app.js" type="text/javascript"></script>
 </body>
 
 </html>
