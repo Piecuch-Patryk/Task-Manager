@@ -9,8 +9,9 @@ html {
 }
 
 body {
-    text-align: center;
+    min-height: 100vh;
     width: 100rem;
+    text-align: center;
     margin: 0 auto;
 }
 
@@ -51,9 +52,10 @@ body h1 {
     border: none;
     border-radius: .2rem;
     padding: 1rem;
-    background-color: rgba(255, 255, 255, .8);
     font-size: 2rem;
     color: rgba(10, 30, 60, .8);
+    background: none;
+    background-image: linear-gradient(90deg, rgba(255, 255, 255, .8)50%, rgba(10, 30, 60, .01)99%);
     transition: .5s;
 }
 
@@ -125,16 +127,23 @@ body h1 {
     font-size: 2rem;
     color: rgba(255, 255, 255, .9);
     border-radius: .5rem;
+    transition: .25s;
+}
+
+.tasks-list li:hover {
+    cursor: pointer;
+    transform: scale(1.01);
 }
 
 .tasks-list p {
-    display: inline-block;
     margin-left: 3rem;
     color: rgba(10, 30, 60, .8);
 }
 
 .tasks-list span {
     margin-right: 3rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
 }
 
 .toggle-btn,
@@ -166,6 +175,7 @@ body h1 {
 
 .line-throught {
     text-decoration: line-through;
+    text-decoration-color: black
 }
 
 .checked-btn {
