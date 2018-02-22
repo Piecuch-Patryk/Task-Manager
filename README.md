@@ -1,7 +1,8 @@
 # Task manager
 Simply access Your own tasks.
 
-# demo: http://piecuch-patryk.com/projects/task-manager/
+# demo: 
+http://piecuch-patryk.com/projects/task-manager/
 
 # Description:
 Login to Your account or simply register new one. Add, toggle or delete task. Describe every task with categories like: Important, Work, Home.
