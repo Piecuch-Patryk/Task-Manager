@@ -1,4 +1,4 @@
-// get inner text and check charcters;
+// get inner text and check characters;
 function newTask() {
     let textField = document.getElementById('taskText'),
         validation = document.querySelector('.app-container input:checked'),
@@ -40,20 +40,87 @@ function newTask() {
         const actualTimeDate = 'Added ' + hour + ':' + minute + ':' + second + ' | ' + day + '/' + month + '/' + year;
 
         validation = validation.id;
-
+        
+        const text = textField.value,
+            validity = validation,
+            checkbox = '0',
+            date = actualTimeDate;
         // create new task object;
-        const newObj = new Object();
-        newObj.id = textField.value;
-        newObj.validity = validation;
-        newObj.date = actualTimeDate;
-        tasksArray.push(newObj);
-
+        newTaskDb(text,validity,checkbox,date);
+        const newTaskObj = new Object();
+        newTaskObj.id = '';
+        newTaskObj.user = '';
+        newTaskObj.task = text;
+        newTaskObj.checkbox = checkbox;
+        newTaskObj.validity = validity;
+        newTaskObj.date = date;
+        console.log(newTaskObj.date);
         // reset fault section;
         document.querySelector('.fault').innerHTML = '';
         // default input text background image;
         resetInputBgc();
-        // create and show list;
-        createList();
+        // add into tasks list as last;
+        showNewTask([newTaskObj]);
     }
     return;
 }
+// add new task to data base;
+function newTaskDb(text, validity, checkbox, date){
+    $.ajax({
+            url: "new-task.php",
+            type: "POST",
+            data: { 'task': text,'checkbox':checkbox , 'validity': validity, 'date': date},                   
+            success: function(){
+                // callback!
+                alert('New task added!');
+            }
+        });
+}
+// add new task into list as last one;
+function showNewTask(tasksArray){
+    const list = document.getElementById('tasks');
+    for (let i = 0; i < tasksArray.length; i++) {
+        const li = document.createElement('li'),
+            toggleBtn = createDOMel('btn', 'toggle'),
+            deleteBtn = createDOMel('btn', 'delete'),
+            span = createDOMel('span'),
+            spanHidden = createDOMel('span', 'spanHidden'),
+            p = createDOMel('p'),
+            textNodeP = createDOMel('textNodeP', tasksArray[i]),
+            textNodeDate = createDOMel('textNodeDate', tasksArray[i]),
+            checkbox = createDOMel('checkbox', tasksArray[i]),
+            validity = createDOMel('validity', tasksArray[i]),
+            taskID = createDOMel('id', tasksArray[i]);
+        console.log(tasksArray[i]);
+        // build up task list;
+        li.appendChild(toggleBtn);
+        li.appendChild(p);
+        p.appendChild(textNodeP);
+        li.appendChild(span);
+        span.appendChild(textNodeDate);
+        li.appendChild(deleteBtn);
+        // append hidden element with task ID;
+        li.appendChild(spanHidden)
+        list.appendChild(li);
+        // toggle complete tasks;
+        if(checkbox == 1){
+            li.classList.add('line-throught');
+            toggleBtn.firstChild.classList.add('checked-btn');
+        }
+        // set background depending on validity;
+        setBackground(validity, li);
+    }
+    toggleTask();
+    // clear fault field;
+    resetFaultField();
+    // clear input field;
+    clearInputField();
+    // task buttons;
+    deleteTask();
+    // reset radio input;
+    resetRadio();
+}
+
+
+
+

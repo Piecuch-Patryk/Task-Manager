@@ -35,13 +35,15 @@ try {
             throw new Exception($connection->error);
         }
         // check if given username exist; No - redirect to index.html with error message;
-        $user = $result->num_rows;
-        if ($user != 0){
+        if ($result->num_rows > 0){
             // get all data from db as an array;
             $row = $result->fetch_assoc();
+            $_SESSION['result'] = $result;
             // verify password; Yes - logged in! No - redirect to index.php;
             if (password_verify($password, $row['pass'])) {
                 // *** LOGGED IN ***
+                $_SESSION['id'] = $row['id'];
+                $_SESSION['task'] = $row['task'];
                 // close data base query;
                 $result->close();
                 $_SESSION['logged'] = true;
