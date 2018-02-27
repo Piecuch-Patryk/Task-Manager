@@ -13,7 +13,10 @@ function resetRadio() {
 
 // clear fault field;
 function resetFaultField() {
-    document.querySelector('.fault').innerHTML = '';
+    const el = document.querySelector('#tasks h4');
+    if (el){
+        el.innerHTML = '';  
+    }
 }
 // clear input field;
 function clearInputField() {

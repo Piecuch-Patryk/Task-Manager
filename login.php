@@ -1,12 +1,27 @@
 <?php
+// require HTTPS!
+if ($_SERVER['HTTPS'] != "on") {
+    $url = "https://". $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+    header("Location: $url");
+    exit;
+}
 session_start();
 // check if the form has been sent; No - redirect to index.php;
-if (!isset($_POST['submit'])){
+if (!isset($_POST['submit']) && !isset($_SESSION['demo-user'])){
     header('location: ./index.php');
     exit();
+} 
+// short cut for demo account login;
+if (!isset($_POST['submit']) && isset($_SESSION['demo-user'])){
+    $login = $_SESSION['demo-user'];
+    $password = $_SESSION['demo-pass'];
+} 
+
+// form submited;
+if (isset($_POST['submit']) && !isset($_SESSION['demo-user'])){
+    $login = $_POST['login'];
+    $password = $_POST['password'];
 }
-$login = $_POST['login'];
-$password = $_POST['password'];
 // hash password;
 $passHash = password_hash($login, PASSWORD_DEFAULT);
 // login and password can not be empty;
@@ -16,7 +31,7 @@ if ($login == '' || $password == ''){
     exit();
 }
 // connect with data base;
-require_once('./dbconnect.php');
+require_once('./db/dbconnect.php');
 // the way to report any faults;
 mysqli_report(MYSQLI_REPORT_STRICT);
 
@@ -48,7 +63,7 @@ try {
                 $result->close();
                 $_SESSION['logged'] = true;
                 $_SESSION['login'] = $login;
-                header('location: ./memberpage.php');
+                header('location: ./logged-in/');
             } else {
                 $_SESSION['errorLogin'] = 'Login or Password incorrect';
                 header('location: ./index.php');

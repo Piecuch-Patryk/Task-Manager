@@ -4,13 +4,13 @@ const createDOMel = function(el, type){
     if(el == 'btn'){
         const btn = document.createElement('button');
         if(type == 'toggle'){
-            btn.classList.add('toggle-btn');
+            btn.classList.add('btn','btn-link', 'btn', 'col-1', 'toggle-btn');
             btn.setAttribute('type', 'button');
             btn.innerHTML = '<i class="fa fa-check-square-o" aria-hidden="true"></i>';
             return btn;
         }
         if(type == 'delete'){
-            btn.classList.add('delete-btn');
+            btn.classList.add('btn', 'btn-link', 'text-light', 'col-1', 'delete-btn');
             btn.setAttribute('type', 'button');
             btn.innerHTML = '<i class="fa fa-trash" aria-hidden="true"></i>';
             return btn;
@@ -27,7 +27,9 @@ const createDOMel = function(el, type){
         }
     }
     if(el == 'p'){
-        const p = document.createElement('p');
+        const p = document.createElement('input');
+        p.setAttribute('readonly', true);
+        p.classList.add('col-10', 'm-0', 'p-0');
         return p;
     }
     // task text;
@@ -55,37 +57,39 @@ const createDOMel = function(el, type){
 // create list (inner html)
 function createList(tasksArray) {
     const container = document.querySelector('.tasks-list'),
-        ul = document.createElement('ul');
+          ul = document.createElement('ul');
     
+    ul.classList.add('list-group');
     container.appendChild(ul).setAttribute('id', 'tasks');
     if(typeof tasksArray != 'string'){
-        showMessage(false);
         for (let i = 0; i < tasksArray.length; i++) {
             const li = document.createElement('li'),
+                  divRow = document.createElement('div'),
                 toggleBtn = createDOMel('btn', 'toggle'),
                 deleteBtn = createDOMel('btn', 'delete'),
-                span = createDOMel('span'),
                 spanHidden = createDOMel('span', 'spanHidden'),
                 p = createDOMel('p'),
                 textNodeP = createDOMel('textNodeP', tasksArray[i]),
-                checkbox = createDOMel('checkbox', tasksArray[i]),
+                checkbox = tasksArray[i].checkbox,
                 validity = createDOMel('validity', tasksArray[i]),
                 taskID = createDOMel('id', tasksArray[i]);
-            console.log(tasksArray[i]);
+            // add bootstrap styles;
+            li.classList.add('list-group-item', 'my-1', 'p-1', 'border-0');
+            divRow.classList.add('row');
             // build up task list;
-            li.appendChild(toggleBtn);
-            li.appendChild(p);
-            p.appendChild(textNodeP);
-            li.appendChild(span);
-//            span.appendChild(textNodeDate);
-            li.appendChild(deleteBtn);
+            li.appendChild(divRow);
+            divRow.appendChild(toggleBtn);
+            divRow.appendChild(p);
+            p.value = tasksArray[i].task;
+            divRow.appendChild(deleteBtn);
             // append hidden element with task ID;
-            li.appendChild(spanHidden)
+            spanHidden.appendChild(taskID);
+            divRow.appendChild(spanHidden);
             ul.appendChild(li);
             // toggle complete tasks;
             if(checkbox == 1){
-                li.classList.add('line-throught');
-                toggleBtn.firstChild.classList.add('checked-btn');
+                p.classList.add('line-through');
+                toggleBtn.firstChild.classList.add('text-success');
             }
             // set background depending on validity;
             setBackground(validity, li);
@@ -121,13 +125,21 @@ function setBackground(str, el) {
     return;
 }
 // show message if no tasks in db;
-function showMessage(bool){   
-    const el = document.getElementById('tasks'),
+function showMessage(bool){
+    const el = document.querySelector('.tasks-list'),
           h4 = document.createElement('h4');
-    if (bool == true){
-        el.appendChild(h4).innerHTML = 'No tasks in data base. You can simply add new task above.';
-    }else {
-        el.innerHTML = '';
+    h4.classList.add('text-light', 'text-center', 'py-2');
+    if (bool){
+        if (el.getElementsByClassName('list-group-item').length <= 0){
+            el.appendChild(h4).innerHTML = 'No tasks in data base. You can simply add new task above.';
+        }
+    }
+    if (!bool){
+        if (el.getElementsByClassName('list-group-item').length > 0){  
+            if (el.querySelector('h4')){   
+                el.querySelector('h4').remove();
+            }
+        }
     }
 }
 
