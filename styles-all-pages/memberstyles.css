@@ -1,0 +1,24 @@
+.bg-member {
+    min-height: 100vh;
+}
+.bg-member::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(../img/amazing-animal-beautiful-beautifull.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    opacity: .8;
+    z-index: -10;
+}
+.tasks-list {
+    background-color: rgba(0, 0, 0, .6);
+    z-index: -5;
+}
+.line-through {
+    text-decoration-line: line-through;
+}

@@ -1,0 +1,21 @@
+body {
+    min-height: 100vh;
+}
+.register-bg {
+    background-image: url("../img/cairn-fog-mystical-background-158607.jpeg");
+    background-size: cover;
+    background-position: 20% -10%;
+    background-repeat: no-repeat;
+}
+@media screen and (max-width: 40rem){
+    .captcha {
+        transform: scale(.65);
+        transform-origin: 0 0;
+    }
+}
+/*fix white lane above background-image; only large screen;*/
+@media screen and (min-width: 1000px){
+    .register-bg {
+        background-size: 100% 100%;
+    }
+}

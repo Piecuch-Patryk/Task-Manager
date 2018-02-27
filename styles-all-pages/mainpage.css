@@ -1,0 +1,8 @@
+.main-bg {
+    width: 100vw;
+    min-height: 100vh;
+    background-image: url('../img/watercolor-3173964_1920.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
