@@ -11,4 +11,4 @@ Technologies:
 HTML5, CSS3, pure JavaScript (jQuery only for db use), pure PHP and mySQL.
 
 Future plans:
-Security! Force user to use stron password. Bootstrap responsive-design. Add option to edit chosen task.
+Security! Force user to use strong password. Bootstrap responsive-design. Add option to edit chosen task.
