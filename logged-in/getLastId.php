@@ -15,7 +15,7 @@ try {
     if ($connection->connect_errno != 0){
         throw new Exception($connection->error);
     } else {
-        $result = $connection->query("SELECT `id` FROM `tasks` where `user`=1 ORDER BY `id` DESC LIMIT 1");
+        $result = $connection->query("SELECT `id` FROM `tasks` where `user`='$user' ORDER BY `id` DESC LIMIT 1");
         // no faults? carry on;
         if (!$result) {
             throw new Exception($connection->error);
