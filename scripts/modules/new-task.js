@@ -75,9 +75,6 @@ function newTaskDb(text, validity, checkbox, date){
                 showMessage(false);
                 // get last id from data base;
                 getLastId();
-                setTimeout(function(){
-                    alert('New task added!');
-                }, 100)
             }
     });
 }
@@ -85,38 +82,8 @@ function newTaskDb(text, validity, checkbox, date){
 function showNewTask(tasksArray){
     const list = document.getElementById('tasks');
     for (let i = 0; i < tasksArray.length; i++) {
-        const li = document.createElement('li'),
-              divRow = document.createElement('div'),
-            toggleBtn = createDOMel('btn', 'toggle'),
-            deleteBtn = createDOMel('btn', 'delete'),
-            span = createDOMel('span'),
-            spanHidden = createDOMel('span', 'spanHidden'),
-            p = createDOMel('p'),
-            textNodeP = createDOMel('textNodeP', tasksArray[i]),
-            textNodeDate = createDOMel('textNodeDate', tasksArray[i]),
-            checkbox = createDOMel('checkbox', tasksArray[i]),
-            validity = createDOMel('validity', tasksArray[i]),
-            taskID = createDOMel('id', tasksArray[i]);
-        li.classList.add('list-group-item', 'my-1', 'p-1', 'border-0');
-        divRow.classList.add('row');
-        // build up task list;
-        li.appendChild(divRow);
-        divRow.appendChild(toggleBtn);
-        divRow.appendChild(p);
-        p.appendChild(textNodeP);
-//        li.appendChild(span);
-        span.appendChild(textNodeDate);
-        divRow.appendChild(deleteBtn);
-        // append hidden element with task ID;
-        divRow.appendChild(spanHidden)
-        list.appendChild(li);
-        // toggle complete tasks;
-        if(checkbox == 1){
-            li.classList.add('line-through');
-            toggleBtn.firstChild.classList.add('checked-btn');
-        }
-        // set background depending on validity;
-        setBackground(validity, li);
+        // create single task element;
+        list.appendChild(createTaskElement(tasksArray[i]));
     }
     toggleTask();
     // clear fault field;

@@ -4,13 +4,13 @@ const createDOMel = function(el, type){
     if(el == 'btn'){
         const btn = document.createElement('button');
         if(type == 'toggle'){
-            btn.classList.add('btn','btn-link', 'btn', 'col-1', 'toggle-btn');
+            btn.classList.add('btn','btn-link', 'btn', 'col-1', 'p-0', 'toggle-btn');
             btn.setAttribute('type', 'button');
             btn.innerHTML = '<i class="fa fa-check-square-o" aria-hidden="true"></i>';
             return btn;
         }
         if(type == 'delete'){
-            btn.classList.add('btn', 'btn-link', 'text-light', 'col-1', 'delete-btn');
+            btn.classList.add('btn', 'btn-link', 'text-light', 'col-1','p-0', 'delete-btn');
             btn.setAttribute('type', 'button');
             btn.innerHTML = '<i class="fa fa-trash" aria-hidden="true"></i>';
             return btn;
@@ -27,9 +27,8 @@ const createDOMel = function(el, type){
         }
     }
     if(el == 'p'){
-        const p = document.createElement('input');
-        p.setAttribute('readonly', true);
-        p.classList.add('col-10', 'm-0', 'p-0');
+        const p = document.createElement('p');
+        p.classList.add('col-10', 'm-0', 'px-0');
         return p;
     }
     // task text;
@@ -63,36 +62,8 @@ function createList(tasksArray) {
     container.appendChild(ul).setAttribute('id', 'tasks');
     if(typeof tasksArray != 'string'){
         for (let i = 0; i < tasksArray.length; i++) {
-            const li = document.createElement('li'),
-                  divRow = document.createElement('div'),
-                toggleBtn = createDOMel('btn', 'toggle'),
-                deleteBtn = createDOMel('btn', 'delete'),
-                spanHidden = createDOMel('span', 'spanHidden'),
-                p = createDOMel('p'),
-                textNodeP = createDOMel('textNodeP', tasksArray[i]),
-                checkbox = tasksArray[i].checkbox,
-                validity = createDOMel('validity', tasksArray[i]),
-                taskID = createDOMel('id', tasksArray[i]);
-            // add bootstrap styles;
-            li.classList.add('list-group-item', 'my-1', 'p-1', 'border-0');
-            divRow.classList.add('row');
-            // build up task list;
-            li.appendChild(divRow);
-            divRow.appendChild(toggleBtn);
-            divRow.appendChild(p);
-            p.value = tasksArray[i].task;
-            divRow.appendChild(deleteBtn);
-            // append hidden element with task ID;
-            spanHidden.appendChild(taskID);
-            divRow.appendChild(spanHidden);
-            ul.appendChild(li);
-            // toggle complete tasks;
-            if(checkbox == 1){
-                p.classList.add('line-through');
-                toggleBtn.firstChild.classList.add('text-success');
-            }
-            // set background depending on validity;
-            setBackground(validity, li);
+            // create single task element;
+            ul.appendChild(createTaskElement(tasksArray[i]));
         }
         toggleTask();
         // clear fault field;
@@ -107,6 +78,41 @@ function createList(tasksArray) {
         showMessage(true);
         return;
     }
+}
+// create single task element;
+const createTaskElement = function (tasksArray){
+    const li = document.createElement('li'),
+        divRow = document.createElement('div'),
+        toggleBtn = createDOMel('btn', 'toggle'),
+        deleteBtn = createDOMel('btn', 'delete'),
+        spanHidden = createDOMel('span', 'spanHidden'),
+        p = createDOMel('p'),
+        textNodeP = createDOMel('textNodeP', tasksArray),
+        checkbox = tasksArray.checkbox,
+        validity = createDOMel('validity', tasksArray),
+        taskID = createDOMel('id', tasksArray);
+    // add bootstrap styles;
+    li.classList.add('list-group-item', 'my-1', 'p-0', 'py-2', 'border-0');
+    divRow.classList.add('row', 'w-100', 'm-auto');
+    // build up task list;
+    li.appendChild(divRow);
+    divRow.appendChild(toggleBtn);
+    divRow.appendChild(p);
+    p.appendChild(textNodeP);
+    divRow.appendChild(deleteBtn);
+    // append hidden element with task ID;
+    spanHidden.appendChild(taskID);
+    divRow.appendChild(spanHidden);
+//    ul.appendChild(li);
+    // toggle complete tasks;
+    if(checkbox == 1){
+        p.classList.add('line-through');
+        toggleBtn.firstChild.classList.add('text-success');
+    }
+    // set background depending on validity;
+    setBackground(validity, li);
+    
+    return li;
 }
 
 // set background-color, depending on task validation;
