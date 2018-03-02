@@ -58,7 +58,7 @@ function createList(tasksArray) {
     const container = document.querySelector('.tasks-list'),
           ul = document.createElement('ul');
     
-    ul.classList.add('list-group');
+    ul.classList.add('list-group', 'mb-5');
     container.appendChild(ul).setAttribute('id', 'tasks');
     if(typeof tasksArray != 'string'){
         for (let i = 0; i < tasksArray.length; i++) {
