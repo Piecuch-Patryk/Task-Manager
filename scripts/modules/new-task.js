@@ -6,14 +6,18 @@ function newTask() {
 
     if (textField.value == '' || textField.value == ' ') {
         faultField.innerHTML = 'No describtion in new task.';
+        errorFieldBgc();
         return;
     }
     if (!validation) {
         faultField.innerHTML = 'Chose type of new task.';
+        errorFieldBgc();
         return;
     }
     if (textField.value.length >= 51) {
         faultField.innerHTML = 'Sorry, no more than 50 characters.'
+        errorFieldBgc();
+        return;
     } else {
         let newDate = new Date(),
             year = newDate.getFullYear(),
