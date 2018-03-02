@@ -32,6 +32,7 @@ if (isset($_POST['submit'])){
     if ($login != ''){
         if (!$loginSafety){
             $flag = false;
+            $_SESSION['login'] = $login;
             $_SESSION['loginError'] = 'Login can contain letters and digits only.';
             header($redirectLocation);
         }
