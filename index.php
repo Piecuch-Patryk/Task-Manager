@@ -108,6 +108,7 @@ if (isset($_SESSION['logged'])){
                 </div>
             </div>
         </main>
+        <?php include('./footer.php'); ?>
     </div>
 </body>
 
