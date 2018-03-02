@@ -16,7 +16,6 @@
     z-index: -10;
 }
 .tasks-list {
-    background-color: rgba(0, 0, 0, .6);
     z-index: -5;
 }
 .line-through {
