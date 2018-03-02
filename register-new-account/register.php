@@ -51,6 +51,14 @@ if (isset($_POST['submit'])){
         header($redirectLocation);
     }
     if ($password != ''){
+        // validate password length;
+        $passLength = strlen($password);
+        if ($passLength < 8 || $passLength > 20){
+            $flag = false;
+            $_SESSION['passError'] = 'Password must contain betwen 8 and 20 characters';
+            header($redirectLocation);
+        }
+        // alphanumeric only;
         if (!ctype_alnum($password)) {
             $flag = false;
             $_SESSION['passError'] = 'Password can contain letters and digits only.';
