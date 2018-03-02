@@ -48,7 +48,7 @@ header('location: ./index.php');
         <form class="container form text-center p-3 app-container">
             <div class="row">
                 <input class="col-10 col-lg-8 form-cotroler mx-auto border-0 task-input" placeholder="New task (max. 50 characters)" type="text" id="taskText">
-                <p class="col-12 m-0 text-danger error-form fault"></p>
+                <p class="col-10 col-lg-8 mt-1 mb-0 mx-auto text-danger error-form fault"></p>
             </div>
             <div class="col-lg-8 m-auto d-flex justify-content-around pb-2 text-secondary validity-box">
                 <span class="radio-span">
@@ -85,5 +85,6 @@ header('location: ./index.php');
     <script src="../scripts/modules/delete-toggle.js" type="text/javascript"></script>
     <!-- run app script    -->
     <script src="../scripts/app.js" type="text/javascript"></script>
+    <script src="../scripts/main.js" type="text/javascript"></script>
 </body>
 </html>
