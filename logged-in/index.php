@@ -33,7 +33,7 @@ header('location: ./index.php');
                 <?php
                     // show welcome message with user's login;
                     if(isset($_SESSION['login'])){
-                        echo 'Welcome: '.'<span class="text-info">'.$_SESSION['login'].'</span>';
+                        echo 'Welcome: '.'<span id="login-title" class="text-info">'.$_SESSION['login'].'</span>';
                     }
                 ?>
                 </h4>
