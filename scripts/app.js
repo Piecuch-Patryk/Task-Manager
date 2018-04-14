@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', allTasks);
 document.getElementById('new').addEventListener('mouseup', newTask);
 // new task on enter event; prevent submit form on enter event;
 document.getElementById('taskText').addEventListener('keypress', function(e){
-    console.log(e);
     if (e.keyCode == 13){
         e.preventDefault();
         newTask();

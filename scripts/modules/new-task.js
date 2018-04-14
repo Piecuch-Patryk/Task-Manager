@@ -68,19 +68,21 @@ function newTask() {
 }
 // add new task to data base;
 function newTaskDb(text, validity, checkbox, date){
-    checkbox = parseInt(checkbox);
-    $.ajax({
-            url: "../logged-in/new-task.php",
-            type: "POST",
-            data: {'task': text, 'checkbox': checkbox, 'validity': validity, 'date': date},                   
-            success: function(){
-                // callback!
-                // hide message;
-                showMessage(false);
-                // get last id from data base;
-                getLastId();
-            }
-    });
+    if($('#login-title').text() !== 'DemoUser'){
+        checkbox = parseInt(checkbox);
+        $.ajax({
+                url: "../logged-in/new-task.php",
+                type: "POST",
+                data: {'task': text, 'checkbox': checkbox, 'validity': validity, 'date': date},                   
+                success: function(){
+                    // callback!
+                    // hide message;
+                    showMessage(false);
+                    // get last id from data base;
+                    getLastId();
+                }
+        });
+    }
 }
 // add new task into list as last one;
 function showNewTask(tasksArray){
@@ -101,18 +103,20 @@ function showNewTask(tasksArray){
 }
 // get last added task id from data base;
 const getLastId = function(){
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            // return last id number;
-            let lastId = JSON.parse(this.responseText)[0].id;
-            lastId = parseInt(lastId);
-            // add id to last task;
-            addIdToLastTask(lastId);
-        }
-    };
-    xmlhttp.open("GET", "../logged-in/getLastId.php", true);
-    xmlhttp.send();
+    if($('#login-title').text() !== 'DemoUser'){
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                // return last id number;
+                let lastId = JSON.parse(this.responseText)[0].id;
+                lastId = parseInt(lastId);
+                // add id to last task;
+                addIdToLastTask(lastId);
+            }
+        };
+        xmlhttp.open("GET", "../logged-in/getLastId.php", true);
+        xmlhttp.send();
+    }
 }
 // add last id to the latest task;
 function addIdToLastTask(num){

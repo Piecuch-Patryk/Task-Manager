@@ -107,7 +107,7 @@ const createTaskElement = function (tasksArray){
     // toggle complete tasks;
     if(checkbox == 1){
         p.classList.add('line-through');
-        toggleBtn.firstChild.classList.add('text-success');
+        toggleBtn.classList.add('text-success');
     }
     // set background depending on validity;
     setBackground(validity, li);
